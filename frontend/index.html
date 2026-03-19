@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>RoastBoy | AI Bio Roaster</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'roast-black': '#0a0a0a',
+            'roast-orange': '#ff4d00',
+            'roast-red': '#ff0000',
+          },
+          animation: {
+            'glow-pulse': 'glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'flicker': 'flicker 3s infinite',
+          },
+          keyframes: {
+            glow: {
+              '0%, 100%': { boxShadow: '0 0 20px 5px rgba(255, 77, 0, 0.6)' },
+              '50%': { boxShadow: '0 0 40px 10px rgba(255, 77, 0, 0.9)' },
+            },
+            flicker: {
+              '0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { opacity: 1 },
+              '20%, 24%, 55%': { opacity: 0.6 },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+    body {
+      font-family: 'Space+Grotesk', sans-serif;
+      background-color: #0a0a0a;
+      color: white;
+    }
+  </style>
+  <style data-purpose="layout-effects">
+    .fire-gradient {
+      background: linear-gradient(135deg, #ff4d00 0%, #ff0000 100%);
+    }
+    .mesh-gradient {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 77, 0, 0.15) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, rgba(255, 0, 0, 0.1) 0, transparent 50%);
+    }
+    .glass-input {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    .glass-input:focus {
+      border-color: #ff4d00;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 77, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="mesh-gradient min-h-screen flex flex-col selection:bg-roast-orange selection:text-white">
+  <!-- Navigation -->
+  <nav class="p-6 md:p-8 flex justify-between items-center">
+    <div class="flex items-center space-x-2 group cursor-pointer">
+      <div class="w-8 h-8 fire-gradient rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform">
+        <span class="text-xl">🔥</span>
+      </div>
+      <span class="text-2xl font-bold tracking-tighter uppercase">RoastBoy</span>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 md:py-24">
+    <div class="max-w-3xl w-full text-center space-y-8">
+      <!-- Headline -->
+      <header class="space-y-4">
+        <h1 class="text-6xl md:text-8xl font-bold tracking-tighter uppercase italic">
+          🔥 <span class="text-transparent bg-clip-text fire-gradient">Roast</span>Boy
+        </h1>
+        <p class="text-zinc-400 text-lg md:text-xl font-light max-w-xl mx-auto">
+          Your bio is a dumpster fire. Let's make it official. The AI that hurts feelings for fun.
+        </p>
+      </header>
+
+      <!-- Roast Interface -->
+      <section class="mt-12 space-y-6 w-full">
+        <!-- Input Area -->
+        <div class="relative group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-roast-orange to-roast-red rounded-2xl blur opacity-20 group-focus-within:opacity-40 transition duration-1000"></div>
+          <textarea class="relative w-full h-48 md:h-64 glass-input rounded-2xl p-6 text-xl md:text-2xl placeholder-zinc-700 resize-none transition-all duration-300" id="bio-input" placeholder="Paste your boring bio here..."></textarea>
+        </div>
+
+        <!-- Action Button -->
+        <div class="flex justify-center pt-4">
+          <button class="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white transition-all duration-200 fire-gradient rounded-full hover:scale-105 active:scale-95 animate-glow-pulse" id="roast-button">
+            <span class="relative flex items-center gap-2 text-xl md:text-2xl uppercase tracking-widest">
+              Roast Me
+              <svg class="w-6 h-6 animate-flicker" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="hidden p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-200 text-center"></div>
+      </section>
+
+      <!-- Trust Badges -->
+      <div class="pt-12 flex flex-wrap justify-center gap-6 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+        <span class="text-xs font-bold uppercase tracking-[0.2em]">1.2M Egos Destroyed</span>
+        <span class="text-xs font-bold uppercase tracking-[0.2em]">Powered by Pure Hate</span>
+        <span class="text-xs font-bold uppercase tracking-[0.2em]">Emotionally Scarring</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="p-8 border-t border-zinc-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-sm">
+      <p class="font-medium">Built for the brave.</p>
+      <div class="flex space-x-6">
+        <a class="hover:text-roast-orange transition-colors" href="#">Privacy is dead</a>
+        <a class="hover:text-roast-orange transition-colors" href="#">Twitter (X)</a>
+        <a class="hover:text-roast-orange transition-colors" href="#">GitHub</a>
+      </div>
+      <p>© 2024 RoastBoy AI</p>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const button = document.getElementById('roast-button');
+    const input = document.getElementById('bio-input');
+    const errorMessage = document.getElementById('error-message');
+
+    const API_URL = 'http://localhost:3000/api/roast';
+
+    button.addEventListener('click', async () => {
+      const bio = input.value.trim();
+      
+      // Validation
+      if (bio === "") {
+        showError('Please enter a bio to roast!');
+        input.classList.add('ring-2', 'ring-red-500');
+        setTimeout(() => input.classList.remove('ring-2', 'ring-red-500'), 1000);
+        return;
+      }
+
+      if (bio.length > 2000) {
+        showError('Bio is too long! Keep it under 2000 characters.');
+        return;
+      }
+
+      hideError();
+      
+      // Show loading state
+      button.disabled = true;
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<span class="animate-pulse">Incinerating your bio... 🔥</span>';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ bio })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to roast bio');
+        }
+
+        const data = await response.json();
+
+        // Store data in sessionStorage for the results page
+        sessionStorage.setItem('roastData', JSON.stringify({
+          roast: data.roast,
+          improvedBio: data.improvedBio,
+          originalBio: data.originalBio
+        }));
+
+        // Redirect to results page
+        window.location.href = '/result.html';
+      } catch (error) {
+        console.error('Error:', error);
+        showError(`Error: ${error.message}`);
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+      }
+    });
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorMessage.classList.add('hidden');
+    }
+
+    // Allow Enter key to submit (Shift+Enter for new line)
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        button.click();
+      }
+    });
+  </script>
+</body>
+</html>
