@@ -1,0 +1,17 @@
+{
+  "name": "roastboy",
+  "version": "1.0.0",
+  "description": "RoastBoy - AI Bio Roaster",
+  "main": "api/roast.js",
+  "scripts": {
+    "dev": "node backend/index.js",
+    "build": "npm install",
+    "start": "node backend/index.js"
+  },
+  "keywords": ["roast", "ai", "gemini", "bio"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.3.1"
+  }
+}
