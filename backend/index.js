@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // Load environment variables
@@ -15,7 +16,10 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('../frontend'));
+
+// Serve static files from frontend directory
+const frontendPath = path.join(__dirname, '../frontend');
+app.use(express.static(frontendPath));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -110,6 +114,19 @@ Remember: Be savage but not mean-spirited. The goal is humor and light-hearted r
       message: error.message || 'An unexpected error occurred'
     });
   }
+});
+
+// Serve HTML pages
+app.get('/', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+app.get('/result.html', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'result.html'));
+});
+
+app.get('/result', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'result.html'));
 });
 
 // 404 handler
