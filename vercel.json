@@ -1,14 +1,18 @@
 {
-  "buildCommand": "npm install",
-  "installCommand": "npm install",
+  "buildCommand": "npm install && mkdir -p public && cp frontend/*.html public/",
+  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api/:path*"
     },
     {
-      "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "source": "/result",
+      "destination": "/result.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
     }
   ]
 }
