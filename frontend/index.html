@@ -34,7 +34,15 @@
   </script>
   <style data-purpose="typography">
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
-    body {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
       font-family: 'Space+Grotesk', sans-serif;
       background-color: #0a0a0a;
       color: white;
@@ -61,7 +69,7 @@
     }
   </style>
 </head>
-<body class="mesh-gradient min-h-screen flex flex-col selection:bg-roast-orange selection:text-white">
+<body class="mesh-gradient w-full h-screen flex flex-col overflow-hidden selection:bg-roast-orange selection:text-white">
   <!-- Navigation -->
   <nav class="p-6 md:p-8 flex justify-between items-center">
     <div class="flex items-center space-x-2 group cursor-pointer">
@@ -73,32 +81,32 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 md:py-24">
-    <div class="max-w-3xl w-full text-center space-y-8">
+  <main class="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-8 overflow-hidden">
+    <div class="w-full h-full max-w-3xl flex flex-col justify-center space-y-4 md:space-y-6">
       <!-- Headline -->
-      <header class="space-y-4">
-        <h1 class="text-6xl md:text-8xl font-bold tracking-tighter uppercase italic">
+      <header class="space-y-2 md:space-y-4 text-center flex-shrink-0">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase italic leading-none">
           🔥 <span class="text-transparent bg-clip-text fire-gradient">Roast</span>Boy
         </h1>
-        <p class="text-zinc-400 text-lg md:text-xl font-light max-w-xl mx-auto">
+        <p class="text-xs sm:text-sm md:text-lg lg:text-xl text-zinc-400 font-light max-w-xl mx-auto">
           Your bio is a dumpster fire. Let's make it official. The AI that hurts feelings for fun.
         </p>
       </header>
 
       <!-- Roast Interface -->
-      <section class="mt-12 space-y-6 w-full">
+      <section class="space-y-3 w-full flex-1 flex flex-col overflow-hidden">
         <!-- Input Area -->
-        <div class="relative group">
+        <div class="relative group flex-1 flex flex-col">
           <div class="absolute -inset-0.5 bg-gradient-to-r from-roast-orange to-roast-red rounded-2xl blur opacity-20 group-focus-within:opacity-40 transition duration-1000"></div>
-          <textarea class="relative w-full h-48 md:h-64 glass-input rounded-2xl p-6 text-xl md:text-2xl placeholder-zinc-700 resize-none transition-all duration-300" id="bio-input" placeholder="Paste your boring bio here..."></textarea>
+          <textarea class="relative w-full h-full glass-input rounded-2xl p-4 md:p-6 text-sm md:text-lg placeholder-zinc-700 resize-none transition-all duration-300 overflow-y-auto" id="bio-input" placeholder="Paste your boring bio here..."></textarea>
         </div>
 
         <!-- Action Button -->
-        <div class="flex justify-center pt-4">
-          <button class="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white transition-all duration-200 fire-gradient rounded-full hover:scale-105 active:scale-95 animate-glow-pulse" id="roast-button">
-            <span class="relative flex items-center gap-2 text-xl md:text-2xl uppercase tracking-widest">
+        <div class="flex justify-center pt-2 flex-shrink-0">
+          <button class="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 font-bold text-white transition-all duration-200 fire-gradient rounded-full hover:scale-105 active:scale-95 animate-glow-pulse text-sm md:text-lg" id="roast-button">
+            <span class="relative flex items-center gap-2 uppercase tracking-widest">
               Roast Me
-              <svg class="w-6 h-6 animate-flicker" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-5 h-5 md:w-6 md:h-6 animate-flicker" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </span>
@@ -106,28 +114,22 @@
         </div>
 
         <!-- Error Message -->
-        <div id="error-message" class="hidden p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-200 text-center"></div>
+        <div id="error-message" class="hidden p-2 md:p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-200 text-center text-xs md:text-sm flex-shrink-0"></div>
       </section>
 
-      <!-- Trust Badges -->
-      <div class="pt-12 flex flex-wrap justify-center gap-6 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-        <span class="text-xs font-bold uppercase tracking-[0.2em]">1.2M Egos Destroyed</span>
-        <span class="text-xs font-bold uppercase tracking-[0.2em]">Powered by Pure Hate</span>
-        <span class="text-xs font-bold uppercase tracking-[0.2em]">Emotionally Scarring</span>
-      </div>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="p-8 border-t border-zinc-900 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-sm">
-      <p class="font-medium">Built for the brave.</p>
-      <div class="flex space-x-6">
-        <a class="hover:text-roast-orange transition-colors" href="#">Privacy is dead</a>
-        <a class="hover:text-roast-orange transition-colors" href="#">Twitter (X)</a>
+  <footer class="p-3 md:p-6 border-t border-zinc-900 flex-shrink-0 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-zinc-500 text-xs md:text-sm">
+      <p class="font-medium hidden md:block">Built for the brave.</p>
+      <div class="flex space-x-3 md:space-x-6 text-xs">
+        <a class="hover:text-roast-orange transition-colors" href="#">Privacy</a>
+        <a class="hover:text-roast-orange transition-colors" href="#">Twitter</a>
         <a class="hover:text-roast-orange transition-colors" href="#">GitHub</a>
       </div>
-      <p>© 2024 RoastBoy AI</p>
+      <p class="text-xs">© 2024 RoastBoy AI</p>
     </div>
   </footer>
 
